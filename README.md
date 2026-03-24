@@ -27,12 +27,11 @@ The dataset is small enough to version in Git for convenience, but in a real pro
 
 - **Deliverable 1 (Run DVC & Roar)**: Complete the step-by-step instructions in [INSTRUCTIONS.md](INSTRUCTIONS.md). Show the TA:
   - Your `dvc dag` output and `roar dag` output
-  - The `dvc exp show` table with your experiments
   - The registered artifact lineage on [glaas.ai](https://glaas.ai/)
 
-- **Deliverable 2 (Experimentation)**: Run 2–3 additional DVC experiments with parameters you choose (different from the defaults in `params.yaml`). In your reflection, explain: how did you compare results across runs? How can you trace back which data and parameters produced a given model?
+- **Deliverable 2 (Experimentation)**: Run 2–3 experiments with parameters you choose (different from the defaults in `params.yaml`) using **both** DVC and Roar. Show the TA how you compare results across runs in each tool and how you can trace back which data and parameters produced a given model.
 
-- **Deliverable 3 (Reflection)**: Written answers to the [reflection questions](#reflection-questions) below, including the completed [summary table](#summary-table). Be prepared to discuss your answers with the TA.
+- **Deliverable 3 (Reflection)**: Complete the [summary table](#summary-table) below and be prepared to discuss the [reflection questions](#reflection-questions) with the TA.
 
 ## How to Use This Repo
 
@@ -120,7 +119,7 @@ You should see output showing the data split, trained model parameters, and eval
 
 ## Part 3: Compare and Reflect
 
-You have now used both tools on the same pipeline. Answer the following questions (write 2–4 sentences each). Refer to the official documentation as needed:
+You have now used both tools on the same pipeline. Fill in the summary table and be ready to discuss the questions below with the TA. Refer to the official documentation as needed:
 
 - [DVC Pipelines Guide](https://dvc.org/doc/user-guide/pipelines)
 - [DVC Experiments Guide](https://dvc.org/doc/user-guide/experiment-management)
@@ -139,7 +138,7 @@ Look at both DAG outputs side by side. Do they show the same pipeline structure?
 When you changed a hyperparameter (DVC) or augmented the dataset (Roar), how did each tool respond? With DVC, what determined which stages re-ran? With Roar, who decided what to re-run?
 
 **Q4 — Experiment tracking and comparison**:
-You ran multiple DVC experiments with different parameters. How did you find and compare results across those runs? How can you trace back which data version and which parameters produced a specific model? Could you achieve the same with Roar — why or why not?
+You ran multiple experiments with both DVC and Roar. How did you find and compare results across runs in each tool? How can you trace back which data version and which parameters produced a specific model? Which tool made this easier?
 
 **Q5 — Team collaboration**:
 Imagine a new teammate joins your project next month. With DVC, they can read `dvc.yaml` in the Git repo. With Roar, they can look up artifact lineage on GLaaS. Which gives a clearer picture of the pipeline? Could you use both tools together — and if so, how?

@@ -173,9 +173,28 @@ roar show @1
 
 Notice it recorded the exact command, git commit, input/output files with content hashes, and runtime environment.
 
-### 2B: Make a Change and Trace the Impact
+### 2B: Run Experiments with Roar
 
-Now change something and observe how the lineage updates.
+Just like you did with DVC, run 2–3 experiments with **different hyperparameters**. Edit `params.yaml` each time, then re-run the pipeline under Roar:
+
+```bash
+# Edit params.yaml with your chosen values, then:
+roar run python3 scripts/train.py
+roar run python3 scripts/evaluate.py
+```
+
+Repeat with different parameter values. After each run, inspect what Roar captured:
+
+```bash
+roar dag
+roar show @latest
+```
+
+Think about: how does Roar track these different runs compared to `dvc exp show`? How would you compare results across runs?
+
+### 2C: Make a Change and Trace the Impact
+
+Now change the data itself and observe how the lineage updates.
 
 **Augment the dataset and re-run**:
 
@@ -194,7 +213,7 @@ roar dag
 
 Notice how the DAG now reflects the current state. Roar keeps history but `roar dag` shows what is true *now*.
 
-### 2C: Register and Browse Lineage on GLaaS
+### 2D: Register and Browse Lineage on GLaaS
 
 Roar can publish lineage to GLaaS (Global Lineage as a Service) so artifacts are globally identifiable by their content hash.
 
