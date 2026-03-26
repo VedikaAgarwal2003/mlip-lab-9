@@ -1,0 +1,80 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python3 scripts/preprocess.py
+    deps:
+    - path: data/raw/data.csv
+      hash: md5
+      md5: efc2f92c8896ed62e98aafa6de6bb095
+      size: 132832
+      isexec: true
+    - path: scripts/preprocess.py
+      hash: md5
+      md5: 4325daa8a9ddd5e7e04757b2a9081255
+      size: 890
+      isexec: true
+    params:
+      params.yaml:
+        preprocess:
+          test_split: 0.2
+          random_state: 42
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: eaa3e674b4083652fab50ad8039a4637
+      size: 27616
+      isexec: true
+    - path: data/processed/train.csv
+      hash: md5
+      md5: d0bd7e230e8c506fee6ad692b07a96f3
+      size: 105507
+      isexec: true
+  train:
+    cmd: python3 scripts/train.py
+    deps:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: d0bd7e230e8c506fee6ad692b07a96f3
+      size: 105507
+      isexec: true
+    - path: scripts/train.py
+      hash: md5
+      md5: c3896ef507423cc3d6978cbcd1f32344
+      size: 805
+      isexec: true
+    params:
+      params.yaml:
+        train:
+          n_estimators: 200
+          max_depth: 10
+          random_state: 42
+    outs:
+    - path: models/classifier.pkl
+      hash: md5
+      md5: 190192ff6c9e34b44a166f6fdb48b828
+      size: 710747
+      isexec: true
+  evaluate:
+    cmd: python3 scripts/evaluate.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: eaa3e674b4083652fab50ad8039a4637
+      size: 27616
+      isexec: true
+    - path: models/classifier.pkl
+      hash: md5
+      md5: 190192ff6c9e34b44a166f6fdb48b828
+      size: 710747
+      isexec: true
+    - path: scripts/evaluate.py
+      hash: md5
+      md5: c38e3878115190534f11c113bac1fbbc
+      size: 816
+      isexec: true
+    outs:
+    - path: metrics/scores.json
+      hash: md5
+      md5: 57bde6d94ae68f325553ca0970accd4f
+      size: 131
+      isexec: true
